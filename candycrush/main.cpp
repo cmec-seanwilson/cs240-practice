@@ -29,9 +29,11 @@ vector<string> randomColorRow () {
 	return colors;
 }
 
-void askSwap () {
+int * promptSwap () {
 	int swapFromIndex = 0;
 	int swapToIndex = 0;
+
+	int indexFromTo[2];
 
 	cout << "Enter an index to swap from (1-10):" << endl;
 	cin >> swapFromIndex;
@@ -39,6 +41,10 @@ void askSwap () {
 	cout << "Enter an index to swap to (1-10):" << endl;
 	cin >> swapToIndex;
 	
+	indexFromTo[0] = swapFromIndex;
+	indexFromTo[1] = swapToIndex;
+
+	return indexFromTo;
 	// TODO: check if selected indices are larger than the vector size
 }
 
@@ -83,13 +89,29 @@ vector<string> parseColorRow (vector<string> row) {
 	return row;
 }
 
+vector<string> swap (vector <string> row, int * indexFromTo) {
+	string from = row[indexFromTo[0]];
+	string to = row[indexFromTo[1]];
+	row[indexFromTo[1]] = from;
+	row[indexFromTo[0]] = to;
+	
+	vector<string> parsedRow = parseColorRow(row);
+	return parsedRow;
+}
+
 int main () {
 	srand(time(0)); 
 
 	vector<string> startRow = randomColorRow();
+	vector<string> parsedRow = parseColorRow(row);
+	
+	printRow("Row", parsedRow);
+	
+	int * indexFromTo = promptSwap();
+	vector<string> row = swap(parsedRow, indexFromTo);
+	printRow("Row", row);
 	// vector<string> row{"R", "R", "R", "R", "R", "R", "B", "G", "B", "R", "R", "R", "R", "R", "P", "O", "O", "O", "O", "O", "G", "G", "G", "A", "B", "B", "B", "G", "G", "B", "B", "B"};
 	// vector<string> parsedRow = parseColorRow(row);
 
-	printRow("Original Row", startRow);
 	// printRow("Parsed Row", parsedRow);
 }
