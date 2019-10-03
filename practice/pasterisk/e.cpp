@@ -15,7 +15,6 @@ void createPattern() {
             for (int j = 0; j <= 10; j++) {
                 std::cout << "*";
             }
-            std::cout;
         } else {
             std::cout << "*";
         } 
